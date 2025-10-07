@@ -1,0 +1,14 @@
+C:\Users\kiril\Documents\PurryForn\Gay\obj\Debug\net9.0\Gay.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kiril\Documents\PurryForn\Gay\obj\Debug\net9.0\Gay.AssemblyInfoInputs.cache
+C:\Users\kiril\Documents\PurryForn\Gay\obj\Debug\net9.0\Gay.AssemblyInfo.cs
+C:\Users\kiril\Documents\PurryForn\Gay\obj\Debug\net9.0\Gay.csproj.CoreCompileInputs.cache
+C:\Users\kiril\Documents\PurryForn\Gay\bin\Debug\net9.0\Gay.exe
+C:\Users\kiril\Documents\PurryForn\Gay\bin\Debug\net9.0\Gay.deps.json
+C:\Users\kiril\Documents\PurryForn\Gay\bin\Debug\net9.0\Gay.runtimeconfig.json
+C:\Users\kiril\Documents\PurryForn\Gay\bin\Debug\net9.0\Gay.dll
+C:\Users\kiril\Documents\PurryForn\Gay\bin\Debug\net9.0\Gay.pdb
+C:\Users\kiril\Documents\PurryForn\Gay\obj\Debug\net9.0\Gay.dll
+C:\Users\kiril\Documents\PurryForn\Gay\obj\Debug\net9.0\refint\Gay.dll
+C:\Users\kiril\Documents\PurryForn\Gay\obj\Debug\net9.0\Gay.pdb
+C:\Users\kiril\Documents\PurryForn\Gay\obj\Debug\net9.0\Gay.genruntimeconfig.cache
+C:\Users\kiril\Documents\PurryForn\Gay\obj\Debug\net9.0\ref\Gay.dll
