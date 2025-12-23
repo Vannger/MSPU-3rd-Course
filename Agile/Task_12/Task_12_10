@@ -1,0 +1,8 @@
+SELECT
+  id,
+  source_file,
+  line_no,
+  regexp_replace(raw_line, 'error', 'ERROR', 'gi') AS normalized_log
+FROM claims_import_lines
+WHERE source_file = 'ingest_claims_log.txt'
+  AND raw_line ~* 'error';

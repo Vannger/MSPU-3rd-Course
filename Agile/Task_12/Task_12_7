@@ -1,0 +1,7 @@
+SELECT
+  id,
+  source_file,
+  line_no,
+  regexp_replace(raw_line, '\D', '', 'g') AS phone_digits
+FROM claims_import_lines
+WHERE raw_line ~ '\+?\d[\d\s()-]+';

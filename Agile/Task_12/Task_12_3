@@ -1,0 +1,11 @@
+SELECT
+  id,
+  source_file,
+  line_no,
+  (regexp_match(
+    raw_line,
+    '([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})'
+  ))[1] AS email
+FROM claims_import_lines
+WHERE raw_line ~
+  '([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})';

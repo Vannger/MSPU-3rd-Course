@@ -1,0 +1,10 @@
+SELECT
+  id,
+  source_file,
+  line_no,
+  regexp_split_to_table(
+    raw_line,
+    '",\s*"'
+  ) AS field
+FROM claims_import_lines
+WHERE source_file = 'patients_dirty.csv';

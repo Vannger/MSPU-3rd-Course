@@ -1,0 +1,16 @@
+SELECT
+  quest_id,
+  realm,
+  status,
+  CASE
+    WHEN status = 'completed'
+      THEN reward_gold - consumables_cost - fine
+    ELSE 0
+  END AS net_gold,
+  CASE
+    WHEN difficulty <= 2 THEN 'easy'
+    WHEN difficulty <= 4 THEN 'mid'
+    ELSE 'hard'
+  END AS diff_band
+FROM quests
+ORDER BY quest_date, quest_id;

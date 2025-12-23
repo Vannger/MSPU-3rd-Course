@@ -1,0 +1,11 @@
+SELECT
+  id,
+  source_file,
+  line_no,
+  regexp_matches(
+    raw_line,
+    '(POL-?\d+|C\d+)',
+    'g'
+  ) AS identifiers
+FROM claims_import_lines
+WHERE raw_line ~* '(POL-?\d+|C\d+)';

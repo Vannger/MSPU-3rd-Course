@@ -1,0 +1,8 @@
+SELECT
+  id,
+  source_file,
+  line_no,
+  raw_line
+FROM claims_import_lines
+WHERE raw_line ~
+  '([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})';
