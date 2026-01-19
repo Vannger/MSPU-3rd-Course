@@ -1,0 +1,13 @@
+SELECT
+  id,
+  source_file,
+  line_no,
+  array_remove(
+    regexp_split_to_array(
+      regexp_replace(raw_line, '^.*tags:\s*', ''),
+      '\s*,\s*'
+    ),
+    ''
+  ) AS tags
+FROM claims_import_lines
+WHERE raw_line ~ '^tags:';

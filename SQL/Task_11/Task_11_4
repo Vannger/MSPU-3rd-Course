@@ -1,0 +1,10 @@
+SELECT
+  player_class,
+  SUM(reward_gold - consumables_cost - fine)
+    FILTER (WHERE status = 'completed') AS completed_gold,
+  COUNT(*) FILTER (WHERE status = 'failed') AS fail_cnt,
+  (COUNT(*) FILTER (WHERE status = 'failed'))::numeric
+    / COUNT(*) AS fail_rate
+FROM quests
+GROUP BY player_class
+ORDER BY fail_rate DESC;

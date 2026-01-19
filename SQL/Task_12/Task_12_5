@@ -1,0 +1,11 @@
+SELECT
+  id,
+  source_file,
+  line_no,
+  regexp_matches(
+    raw_line,
+    '(CPT-\d+|ICD10-[A-Z]\d+(\.\d+)?)',
+    'g'
+  ) AS procedure_codes
+FROM claims_import_lines
+WHERE raw_line ~ '(CPT-|ICD10-)';

@@ -1,0 +1,48 @@
+DROP TABLE IF EXISTS orders;
+
+CREATE TABLE orders (
+    id BIGSERIAL PRIMARY KEY,
+    customer_name TEXT NOT NULL,
+    order_code TEXT NOT NULL,
+    notes TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+INSERT INTO orders (customer_name, order_code, notes, created_at)
+SELECT
+    'Customer_' || gs,
+    'ORD-' || (gs % 10000),
+    CASE
+        WHEN gs % 10 = 0 THEN 'urgent delivery required'
+        ELSE 'regular order note'
+    END,
+    NOW() - (gs || ' minutes')::INTERVAL
+FROM generate_series(1, 500000) AS gs;
+
+EXPLAIN ANALYZE
+SELECT *
+FROM orders
+WHERE order_code = 'ORD-1234';
+
+CREATE INDEX idx_orders_order_code
+ON orders (order_code);
+
+EXPLAIN ANALYZE
+SELECT *
+FROM orders
+WHERE order_code = 'ORD-1234';
+
+EXPLAIN ANALYZE
+SELECT *
+FROM orders
+WHERE notes ILIKE '%urgent%';
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
+CREATE INDEX idx_orders_notes_trgm
+ON orders
+USING GIN (notes gin_trgm_ops);
+EXPLAIN ANALYZE
+SELECT *
+FROM orders
+WHERE notes ILIKE '%urgent%';

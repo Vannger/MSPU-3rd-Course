@@ -1,0 +1,9 @@
+SELECT
+  quest_id,
+  mode,
+  difficulty
+FROM quests
+WHERE difficulty > CASE
+  WHEN mode = 'solo' THEN 3
+  ELSE 4
+END;

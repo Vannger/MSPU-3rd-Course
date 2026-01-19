@@ -1,0 +1,46 @@
+CREATE TABLE item (
+    id           serial PRIMARY KEY,
+    name         text NOT NULL UNIQUE,
+    rarity       text NOT NULL CHECK (rarity IN ('common', 'rare', 'epic', 'legendary')),
+    stack_limit  integer NOT NULL CHECK (stack_limit > 0)
+);
+
+CREATE TABLE item_info (
+    item_id         integer PRIMARY KEY,
+    weight          numeric(10,3) NOT NULL CHECK (weight >= 0),
+    is_tradeable    boolean NOT NULL,
+    durability_max  integer NOT NULL CHECK (durability_max >= 0),
+    CONSTRAINT fk_item_info_item
+        FOREIGN KEY (item_id)
+        REFERENCES item (id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE recipe (
+    id                   serial PRIMARY KEY,
+    name                 text NOT NULL UNIQUE,
+    output_item_id       integer NOT NULL,
+    craft_time_seconds   integer NOT NULL CHECK (craft_time_seconds > 0),
+    required_station     text NOT NULL CHECK (
+        required_station IN ('campfire', 'anvil', 'alchemy_table')
+    ),
+    CONSTRAINT fk_recipe_output_item
+        FOREIGN KEY (output_item_id)
+        REFERENCES item (id)
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE recipe_ingredient (
+    recipe_id  integer NOT NULL,
+    item_id    integer NOT NULL,
+    quantity   integer NOT NULL CHECK (quantity > 0),
+    PRIMARY KEY (recipe_id, item_id),
+    CONSTRAINT fk_recipe_ingredient_recipe
+        FOREIGN KEY (recipe_id)
+        REFERENCES recipe (id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_recipe_ingredient_item
+        FOREIGN KEY (item_id)
+        REFERENCES item (id)
+        ON DELETE RESTRICT
+);

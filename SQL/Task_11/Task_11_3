@@ -1,0 +1,9 @@
+SELECT
+  realm,
+  COUNT(*) AS q_cnt,
+  SUM(reward_gold) AS sum_gold,
+  AVG(reward_xp) AS avg_xp,
+  MAX(difficulty) AS max_diff
+FROM quests
+GROUP BY realm
+ORDER BY sum_gold DESC;

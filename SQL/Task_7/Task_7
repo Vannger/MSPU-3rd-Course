@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS courses;
+
+CREATE TABLE courses (
+    id SERIAL PRIMARY KEY,
+    course_name TEXT NOT NULL,
+    hours INTEGER NOT NULL CHECK (hours BETWEEN 10 AND 200),
+    difficulty_level INTEGER NOT NULL CHECK (difficulty_level BETWEEN 1 AND 5)
+);
+
+INSERT INTO courses (course_name, hours, difficulty_level) VALUES
+    ('Introduction to Programming', 40, 1),
+    ('Databases and SQL', 60, 2),
+    ('Web Development', 120, 3),
+    ('Advanced Algorithms', 180, 5);

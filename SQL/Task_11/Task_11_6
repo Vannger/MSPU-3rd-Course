@@ -1,0 +1,17 @@
+SELECT
+  realm,
+  mode,
+  COUNT(DISTINCT quest_date) AS unique_days,
+  AVG(reward_gold - consumables_cost - fine)
+    FILTER (WHERE status = 'completed') AS avg_completed_net,
+  AVG(
+    (difficulty > CASE
+      WHEN mode = 'solo' THEN 3
+      ELSE 4
+    END)::int
+  ) AS hard_share
+FROM quests
+GROUP BY realm, mode
+HAVING
+  COUNT(*) FILTER (WHERE status IN ('failed', 'abandoned')) >= 2
+ORDER BY avg_completed_net DESC;
